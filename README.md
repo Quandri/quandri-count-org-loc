@@ -1,101 +1,198 @@
 # Count total lines of code across a GitHub organization
 
-## Usage
+## April 16, 2024
 
-1. `git clone https://github.com/benbalter/count-org-loc && cd count-org-loc`
-2. `gem install bundler`
-3. `script/bootstrap`
-4. `script/count [ORG_NAME | USER_NAME]`
-
-## Usage via GitHub Actions
-
-Don't want to set up a local development environment? You can run this script via GitHub Actions:
-
-1. Fork this repository into your account
-2. Navigate to the "Actions" tab of your fork
-3. Click the "run" workflow on the left side
-4. Click "Run workflow" on the right side
-5. Enter your org. or user name that you'd like to count lines of code for
-6. Click "Run Workflow"
-
-You'll see the progress and count(s) in the job output (also available from the Actions tab).
-
-Note: If you'd like to count private repositories, as described below, you'll need to set an `ORG_GITHUB_TOKEN` GitHub Actions secret with your PAT.
-
-## How it works
-
-It uses [Octokit.rb](https://github.com/octokit/octokit.rb) to fetch a list of your organization's (or user's) repositories (public or public and private), clone each, and [Cloc](https://github.com/AlDanial/cloc) to count the lines of code, number of files, comments, etc.
-
-## Example output for @whitehouse
-
+Per language
 ```
--------------------------------------------------------------------------------
-File                         files          blank        comment           code
--------------------------------------------------------------------------------
-petitions                      247           5981          20274          28748
-wh-app-ios                     202           6929           7409          23451
-fitara                         112            711            481          10693
-cyber-acquisitions             110            709            490          10400
-omb_place                      163            781            972           8684
-wh-app-android                 123           1384            307           8382
-fortyfour                       51            591            702           3902
-education-compliance-reports     3            192              4           2964
-choropleth                       8            320            669           2579
-choropleth_dataset              14             93            508            841
-drushsubtree                     4            220            887            834
-services_documentation          18            154            563            746
-buildmanager                     3             95            400            302
-petitionssignatureform           3             19             48            184
-shunt                            3             42            183            130
-petitions-php-sdk                1             42            151            127
-tweetfetch                       3             29             74            125
-tweetserver                      3             30             74            109
-twitterapi                       3             21             70             59
-petitions_thermometer            1              0              0             56
-netstorage                       1             16             70             45
-logger                           2             10             46             29
-webform_submit_button            1              6             21             20
--------------------------------------------------------------------------------
-SUM:                          1079          18375          34403         103410
--------------------------------------------------------------------------------
-
 --------------------------------------------------------------------------------
-Language                      files          blank        comment           code
+Python                         5605          73252          43634         718304
+JavaScript                       60           8637          10000         240264
+JSON                            242             10              0         105079
+Text                             69            786              0          95271
+YAML                            465           5120           7288          74179
+TypeScript                      455           1334           2856          16763
+CSS                             127           3503           2577          16412
+Markdown                        267          10328             51          15555
+HTML                            192            957            146           9884
+CSV                               7              0              0           6184
+HCL                             112            817            779           3936
+TOML                             45            319              1           1927
+Jupyter Notebook                 36              0           5777            954
+DOS Batch                        46             82              5            459
+Nix                              10             11              2            436
+Bourne Again Shell               13             52              6            356
+INI                              14             60              0            263
+Bourne Shell                     18             82             56            255
+make                              5             40             23            158
+Dockerfile                        9             69             59            157
+SVG                               8              0              0             75
+SQL                               2             35             30             56
+Mako                              3             22              0             52
+PowerShell                        8             21              0             43
+XML                               5              0              0             41
 --------------------------------------------------------------------------------
-CSS                              64           1984           1670          25321
-Objective C                      90           4910           2244          20331
-SASS                            242           3013           1045          16512
-Pascal                          129           3079          20164          11263
-Javascript                       71            931           1519           8304
-Java                             66           1116            246           6882
-JSON                            125            182              0           5380
-PHP                              82            565           1914           3519
-C/C++ Header                    102           1979           5153           2545
-HTML                             32            209            258           1471
-XML                              47            149             28            920
-Bourne Shell                      9             95             70            376
-Groovy                            5             22              4            140
-Bourne Again Shell                1             20             21            123
-Prolog                            2             25              0             74
-Ruby                              6             25             31             69
-DOS Batch                         1             24              2             64
-Python                            1             25              4             63
-YAML                              4             22             30             53
---------------------------------------------------------------------------------
-SUM:                           1079          18375          34403         103410
+SUM:                           7823         105537          73290        1307063
 --------------------------------------------------------------------------------
 ```
 
-## Counting private repositories
 
-To look at private repositories, you'll need to pass a [personal access token](https://github.com/settings/tokens/new) with `repo` scope as `GITHUB_TOKEN`. You can do this by adding `GITHUB_TOKEN=[TOKEN]` to a `.env` file in the repository's root.
-
-If you are working with GitHub Enterprise and want to change your URL, simply add `GITHUB_ENTERPRISE_URL=https://<ghe-url>/api/v3` to the `.env` file
-
-
-Sample `.env` File :
-
-```bash
-GITHUB_TOKEN="<token>"
-GITHUB_ENTERPRISE_URL="https://my-ghe.local/api/v3"
+Per repo
+```
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+File                                                                                                                        files          blank        comment           code
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+liz-second-brain                                                                                                               94           7827          11647         238494
+PDF-Engine-v2                                                                                                                1454           9962           1024         220653
+library-qrenewalengine                                                                                                        847           3605            520         143525
+Mackay-Renewal-Revision                                                                                                        83           2872           2269         103289
+PDF-Extraction-Engine                                                                                                         199          15307           1702          94809
+Robot-Factory                                                                                                                1051          11366           2176          65342
+control-room-ui                                                                                                               589           1896            496          47715
+library-qedocengine                                                                                                           369           3727            460          28295
+elmarsto-experiment                                                                                                             6             28           2517          24637
+control-room-api                                                                                                               15            134              7          19899
+library-renewal-reviewer-report-generator                                                                                     119           1919            455          18007
+renewal-reviewer-pb                                                                                                            77           1404            857          16571
+Renewal-Reviewer                                                                                                              115           1224            527          15540
+Portal-Processor                                                                                                              107           1312            625          13877
+library-qclassifier                                                                                                            95           1034            442          13350
+eDoc-Executive                                                                                                                 55            404            328          12535
+library-qedoc-executive                                                                                                        61            792            619          12076
+ganglion                                                                                                                        8              7              6          10095
+library-PowerBroker                                                                                                            77           1942           3738           9126
+library-epic-download-director                                                                                                119           1364           1041           8955
+library-qsensor                                                                                                                76           1346            885           8480
+library-Epic-Cloud                                                                                                             96           2249           3172           8356
+library-qinventory                                                                                                             35            588           1960           7049
+Download-Director                                                                                                              17            890           2681           6882
+paranoia                                                                                                                       10             53              4           6879
+Cornerstone-InboundLeadsV2                                                                                                     39            952           1470           6787
+PB-Download-Director                                                                                                           41            885           1350           6714
+qdashboards                                                                                                                    59           1694           2036           6511
+library-SigXP                                                                                                                  59           1712           2201           6430
+The-Beach                                                                                                                      20             78            130           6165
+library-quandri-core                                                                                                           49           1554           2435           5402
+library-Guidewire                                                                                                              93            804            604           5399
+Cornerstone-Inbound-Leads                                                                                                      26            909            837           4496
+Capri-eDoc-Importing                                                                                                           59            756            535           3878
+Robot-API                                                                                                                     128            921            140           3762
+Model-Regression-Suite                                                                                                         28            237            126           3728
+Davey-Renewal-Processing                                                                                                       48           1089            659           3690
+library-qextractor                                                                                                             37            848            911           3337
+Akan-Driver-Changes                                                                                                            29            785           1396           2993
+Excalibur-Application-Closing                                                                                                  34            365            489           2960
+Cornerstone-Edoc-Renaming                                                                                                      15            431             89           2801
+PowerBroker-eDoc-Executive                                                                                                     16            356            613           2791
+Excalibur-EDI                                                                                                                  14            204            446           2696
+SigXP-Renewal-Reviewer                                                                                                         25            224            238           2422
+library-data-types                                                                                                             45            634            102           1969
+qrenewals-emailer                                                                                                              31            604            374           1963
+library-qemitter                                                                                                               19            396           1696           1947
+QUSAClassifier                                                                                                                 20            261            369           1793
+library-renewals-shared                                                                                                        24            434            183           1793
+Duliban-eDoc-Exec                                                                                                               8             52             10           1753
+recipes-quandri-devops                                                                                                         39            365            258           1719
+template-dashboard                                                                                                             35            332            410           1628
+Lakeview-Download-Director                                                                                                      9            230            320           1620
+Freddie-Juno-Creation                                                                                                          21            497            644           1619
+QUSAEdocEngine                                                                                                                 19            277            200           1579
+pdf-engine-portal                                                                                                              19            323            339           1522
+Epic-DD-Bot-Manager                                                                                                            15            234             48           1455
+Billyard-Download-Director                                                                                                      9            231            275           1395
+library-qrenewal-reviewer                                                                                                      41            596            450           1392
+quandri-infra-prod                                                                                                             34            291            213           1360
+Freddie-Prescription-Refill                                                                                                    16            348            356           1185
+Freddie-PR                                                                                                                     16            352            356           1182
+library-qcsio                                                                                                                  17            533            374           1129
+QPDF-Checker                                                                                                                   15            189            125           1101
+Gaudreau-EDI                                                                                                                    9            199            121           1078
+library-password-manager                                                                                                       17            442            253           1067
+Monterio                                                                                                                       18            350            306           1051
+digital-worker-library                                                                                                         16            372            331           1049
+robocorp-api-mock                                                                                                              24            222             31            967
+tool-qicli                                                                                                                     15            213            140            944
+test-qedoc-executive                                                                                                           16            437            296            930
+library-qdocindex                                                                                                              17            392            261            927
+library-qutil                                                                                                                  17            247            391            920
+Stoneridge-Download-Director                                                                                                    8            186            112            909
+library-powerbroker-crash-handler                                                                                              23            388            175            893
+template-library                                                                                                               13            417            296            889
+Leibel-Download-Director                                                                                                        9            178            153            875
+library-edoc-executive                                                                                                         13            404            293            870
+library-qexceptions                                                                                                            13            406            232            860
+Lakeview-eDoc-Exec                                                                                                              9             81             59            859
+ml-pdf-rules                                                                                                                   13            396            297            858
+YMM_AC                                                                                                                         12            158            183            856
+library-gsuite                                                                                                                 11            395            133            843
+Duliban-Download-Director                                                                                                       9            183            168            842
+library-qrm                                                                                                                    15            144            212            811
+qstart                                                                                                                         13            183            297            760
+demo-lib                                                                                                                       13            184            297            759
+quandri-interviews                                                                                                             17            203            336            755
+Ciccarello-Download-Director                                                                                                    8            163             95            752
+MacDowell-Download-Director                                                                                                     8            164             87            746
+Leibel-eDoc-Exec                                                                                                                8             32             89            724
+QuandriDocAI                                                                                                                   12            112             66            720
+Macleod-EDI                                                                                                                    11            182             94            718
+library-epic                                                                                                                   10            144            122            691
+late-bot-email-notifier                                                                                                        10             57             16            672
+library-qart                                                                                                                   13            154            293            663
+library-PolicyWorks                                                                                                            15            161            188            649
+renewals-daily-report                                                                                                           9             67             24            633
+library-qack                                                                                                                   13            132            222            618
+Cowan-eDoc-Exec                                                                                                                 4             50             24            611
+Trustpoint-Edoc-Naming                                                                                                          8             74             52            534
+YMM_APD                                                                                                                         7             74             61            502
+dbhandler                                                                                                                      11             86            315            486
+Guild-Pre-Renewals                                                                                                              9             94             63            484
+MacDowell-edoc-exec                                                                                                             7             71             58            429
+Robot-Factory-API-docs                                                                                                          1            116              0            429
+library-TAM                                                                                                                    12            102            101            415
+setup-node-action                                                                                                               8             10              5            295
+setup-nix-action                                                                                                                8             10              5            271
+Project-BotCast                                                                                                                12            105            124            270
+Ing-McKee-Download-Director                                                                                                     7             88            180            248
+C-H-Download-Director                                                                                                           8             73            135            244
+Go-Download-Director                                                                                                            7             82            164            232
+TrustPoint-Download-Director                                                                                                    7             25             13            232
+EDI-docker-test                                                                                                                 9             74            135            227
+Excalibur-TAM-Delete-Nightly                                                                                                    6             37             53            219
+Reith-Download-Director                                                                                                         8             84            154            191
+Strongroots_EDI                                                                                                                 8             74            136            184
+lets-get-coding                                                                                                                14             21              0            183
+One-Download-Director                                                                                                           8             73            136            181
+Brokers-Trust-Download-Director                                                                                                 8             58             90            176
+pics-infra-live                                                                                                                11             48            117            176
+Munn-Download-Director                                                                                                          8             52             78            169
+development_environment                                                                                                         9             22              0            165
+Trigon-Download-Director                                                                                                        8             55             89            152
+localhost_api_setup_django                                                                                                     15             79             75            149
+Kelley-Jiggins-Download-Director                                                                                                7             56             89            148
+Capri-Download-Director                                                                                                         7             24             11            140
+Debugging-Suite                                                                                                                 4             59             38            138
+Excalibur-Close-Day                                                                                                             4             26             17            138
+Quandri-SHREDs                                                                                                                  5             43             32            127
+3rdparty-dependencies                                                                                                           3              7              0            123
+MSI-Close-Day                                                                                                                   4             37             28            112
+Training-Tesseract-OCR                                                                                                          3             37             19            106
+quandri-data-service                                                                                                            6             17              5             75
+chatbot                                                                                                                         5             18             14             72
+AWS                                                                                                                             6             20              7             56
+pics-infra-modules                                                                                                              5             16             12             56
+quandri-scripts                                                                                                                 2              8              3             54
+Epic-RR-Bot-Manager                                                                                                             7             18              5             53
+shredder                                                                                                                        4              0              0             49
+MSI-General-Reporting                                                                                                           4             11              1             30
+Excalibur-Exdates                                                                                                               4              6              1             22
+quandri-bot                                                                                                                     4              7              0             22
+.github                                                                                                                         2              4             11              8
+RobotRunner                                                                                                                     2              1              0              8
+ui-library                                                                                                                      1              2              0              5
+Houchens-Download-Director                                                                                                      1              0              0              2
+control-room                                                                                                                    1              0              0              2
+library-qvault                                                                                                                  1              0              0              2
+library-quandri-vault                                                                                                           1              0              0              1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SUM:                                                                                                                         7823         105537          73290        1307063
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
